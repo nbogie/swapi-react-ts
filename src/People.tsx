@@ -1,10 +1,10 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchPeople } from './swapiAPI';
 export function People() {
     console.log("People re-renders")
 
-    const { data, status } = useQuery("people", fetchPeople, { staleTime: 10000 });
+    const { data, status } = useQuery(["people"], fetchPeople, { staleTime: 10000 });
     console.log({ data, status })
     return <div>People
         <div>

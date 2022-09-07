@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchPlanets } from './swapiAPI';
 export function Planets() {
     console.log("Planets re-renders")
@@ -9,7 +9,7 @@ export function Planets() {
     console.log({ page })
     //failing
     //const { data, status } = useQuery(["planets", page], (_key, page) => fetchPlanets(page), { staleTime: 10000, refetchOnMount: false });
-    const { data, status } = useQuery("planets", fetchPlanets, { staleTime: 10000, refetchOnMount: false });
+    const { data, status } = useQuery(["planets"], fetchPlanets, { staleTime: 10000, refetchOnMount: false });
 
     console.log({ data, status })
     return <div>
