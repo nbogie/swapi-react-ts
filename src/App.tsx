@@ -5,8 +5,10 @@ import { People } from './People';
 import { Planets } from './Planets';
 
 function App() {
+  console.log("App re-renders")
   return (
     <div className="App">
+
       <nav>
         <Link to="/planets">Planets</Link>
         <Link to="/people">People</Link>
