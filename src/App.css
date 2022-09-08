@@ -31,6 +31,16 @@ header nav {
     grid-column: 4/5;
 }
 
+footer {
+    border-top: 1px solid black;
+    margin-top: 20px;
+    padding-top: 10px;
+    grid-row: 3;
+    grid-column: 2 /3;
+    text-align: center;
+}
+
+
 nav a {
     padding: 6px;
 }

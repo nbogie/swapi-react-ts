@@ -22,6 +22,9 @@ function App() {
         <Route path="/planet/:id" element={<PlanetBigView />} />
         <Route path="/person/:id" element={<PersonBigView />} />
       </Routes>
+      <footer>
+        Data from <a href="https://swapi.dev/">https://swapi.dev/</a>
+      </footer>
     </div>
   );
 }
