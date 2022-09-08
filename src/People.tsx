@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPeople } from './swapiAPI';
+import { PagePicker } from './PagePicker';
+import { Person } from './Person';
+import { myQueryOptions } from './myQueryOptions';
 export function People() {
-    console.log("People re-renders")
+    const [page, setPage] = useState<number>(1)
 
-    const { data, status } = useQuery(["people"], fetchPeople, { staleTime: 10000 });
-    console.log({ data, status })
-    return <div>People
+    const { data, status } = useQuery(["people", page], () => fetchPeople(page), myQueryOptions);
+    return <div className="people">
+        <h2>People</h2>
         <div>
-            {status === "success" && data && data.results.map((person: any) => <div key={person.name}>{person.name}</div>)}
+            {
+                status === "success" && data && data.results.map((person: any) =>
+                    <Person key={person.name} person={person} />
+                )
+            }
         </div>
+        <PagePicker setPage={setPage} />
     </div>;
 }

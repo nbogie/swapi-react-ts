@@ -1,27 +1,19 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchPlanets } from './swapiAPI';
+import { fetchPlanets, IPlanet } from './swapiAPI';
+import { PagePicker } from './PagePicker';
+import { myQueryOptions } from './myQueryOptions';
+import { Planet } from './Planet';
 export function Planets() {
-    console.log("Planets re-renders")
-
 
     const [page, setPage] = useState<number>(1)
-    console.log({ page })
-    //failing
-    //const { data, status } = useQuery(["planets", page], (_key, page) => fetchPlanets(page), { staleTime: 10000, refetchOnMount: false });
-    const { data, status } = useQuery(["planets"], fetchPlanets, { staleTime: 10000, refetchOnMount: false });
+    const { data, status } = useQuery(["planets", page], () => fetchPlanets(page), myQueryOptions);
 
-    console.log({ data, status })
-    return <div>
+    return <div className="planets">
         <h2>Planets</h2>
-
         <div>
-            {status === "success" && data && data.results.map((planet: any) => <div key={planet.name}>{planet.name}</div>)}
+            {status === "success" && data && data.results.map((planet: IPlanet) => <Planet planet={planet} />)}
         </div>
-        <div className="pagePicker">
-            {[1, 2, 3, 4].map(ix => <button key={ix} onClick={() => setPage(ix)}>{ix}</button>)}
-
-
-        </div>
+        <PagePicker setPage={setPage} />
     </div>;
 }
